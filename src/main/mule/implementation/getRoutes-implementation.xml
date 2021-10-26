@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<sub-flow name="getRoutes-implementationSub_Flow" doc:id="53762032-4603-4e52-85db-6c96ed87fc65" >
+		<choice doc:name="Choice" doc:id="7f7defa6-a648-47c7-a2e8-29381be2645f" >
+			<when expression="#[vars.transportCompany == 'FastGo']">
+				<set-variable value="#[&quot;/api/&quot; ++ (vars.transportType default &quot;Bus&quot;) ++ (p('http.requester.FastGo.routesPath'))]" doc:name="Set Variable" doc:id="4c247119-0431-4df2-bc1a-35daeb6cd0fc" variableName="resourcePath"/>
+				<http:request method="GET" doc:name="Request" doc:id="26e12aae-68da-46e6-a154-1588f944ffe8" config-ref="HTTP_Request_configuration-FastGo" path="#[vars.resourcePath]">
+					<http:headers ><![CDATA[#[output application/java
+---
+{
+	"transactionId" : vars.transactionId 
+}]]]></http:headers>
+				</http:request>
+				<logger level="INFO" doc:name="Logger" doc:id="2c656f9b-3444-4a2a-8036-8b59d902d31a" message="#[payload]"/>
+			</when>
+			<when expression="#[vars.transportCompany == 'TravelOnTip']">
+				<http:request method="GET" doc:name="Request" doc:id="01dd68a4-59cb-4b4b-9efd-4f055675667a" config-ref="HTTP_Request_configuration-TravelOnTip" path="/api/#[vars.transportType]${http.requester.TravelOnTip.routesPath}"/>
+			</when>
+		</choice>
+	</sub-flow>
+</mule>
