@@ -124,10 +124,10 @@ output application/json
 		<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" doc:name="Transform Message for requested variables">
             <ee:variables>
                 <ee:set-variable variableName="transportType"><![CDATA[attributes.uriParams.'transportType']]></ee:set-variable>
-				<ee:set-variable variableName="transportCompany"><![CDATA[attributes.queryParams.'CompanyName']]></ee:set-variable>
 				<ee:set-variable variableName="transactionId "><![CDATA[attributes.headers.'transactionId']]></ee:set-variable>
 				<ee:set-variable variableName="departureLocation"><![CDATA[attributes.queryParams.'departureLocation']]></ee:set-variable>
 				<ee:set-variable variableName="destinationLocation"><![CDATA[attributes.queryParams.'destinationLocation']]></ee:set-variable>
+				<ee:set-variable variableName="transportCompany" ><![CDATA[attributes.queryParams.'CompanyName']]></ee:set-variable>
             </ee:variables>
         </ee:transform>
 	</sub-flow>

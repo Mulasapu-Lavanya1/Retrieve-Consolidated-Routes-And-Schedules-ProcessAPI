@@ -6,8 +6,8 @@ http:
   TravelOnTip:
     host: "localhost"
     port: "8083"
-    routesPath: "/travelOnTip/routes"
-    schedulesPath: "/travelOnTip/schedules"
+    routesPath: "/TravelOnTip/routes"
+    schedulesPath: "/TravelOnTip/Schedule"
   FastGo:
     host: "localhost"
     port: "8084"
