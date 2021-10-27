@@ -121,13 +121,14 @@ output application/json
         </error-handler>
     </flow>
     <sub-flow name="retrieve-consolidated-routes-and-schedules-xpapiSub_Flow" doc:id="85c0e1cc-3949-45a8-8e70-1a819bf74794" >
-		<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" doc:name="Transform Message for requested variables">
-            <ee:variables>
-                <ee:set-variable variableName="transportType"><![CDATA[attributes.uriParams.'transportType']]></ee:set-variable>
-				<ee:set-variable variableName="transactionId "><![CDATA[attributes.headers.'transactionId']]></ee:set-variable>
-				<ee:set-variable variableName="departureLocation"><![CDATA[attributes.queryParams.'departureLocation']]></ee:set-variable>
-				<ee:set-variable variableName="destinationLocation"><![CDATA[attributes.queryParams.'destinationLocation']]></ee:set-variable>
-				<ee:set-variable variableName="transportCompany" ><![CDATA[attributes.queryParams.'CompanyName']]></ee:set-variable>
+		<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" doc:id="6fcba7d0-6120-4b7c-8e51-c7a4e4743036">
+            <ee:message />
+			<ee:variables>
+                <ee:set-variable variableName="transportType"><![CDATA[attributes.uriParams.'CompanyName']]></ee:set-variable>
+				<ee:set-variable variableName="Transactionid"><![CDATA[attributes.headers.Transactionid]]></ee:set-variable>
+				<ee:set-variable variableName="destinationLocation"><![CDATA[attributes.queryParams.destinationLocation]]></ee:set-variable>
+				<ee:set-variable variableName="departureLocation "><![CDATA[attributes.queryParams.departureLocation]]></ee:set-variable>
+				<ee:set-variable variableName="transportCompany" ><![CDATA[attributes.queryParams.CompanyName]]></ee:set-variable>
             </ee:variables>
         </ee:transform>
 	</sub-flow>
