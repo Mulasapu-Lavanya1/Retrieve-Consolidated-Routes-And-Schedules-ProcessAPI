@@ -76,22 +76,25 @@ payload map(value,index)->(
 	<sub-flow name="getRoutes-implementationSub_Flow" doc:id="53762032-4603-4e52-85db-6c96ed87fc65" >
 		<logger level="INFO" doc:name="Logger" doc:id="abff92aa-64c9-4070-a207-d2932081b9cf" message="before choice logger"/>
 		<choice doc:name="Choice" doc:id="7f7defa6-a648-47c7-a2e8-29381be2645f" >
-			<when expression="#[vars.transportCompany  == 'FastGo']">
+			<when expression='#[vars.transportCompany  == "FastGo"]'>
 				<flow-ref doc:name="Flow Reference" doc:id="64014133-499a-41d0-8b8c-7fbc036c055a" name="getRoutes-callFastGo-subflow" />
 			</when>
-			<when expression="#[vars.transportCompany == 'TravelOnTip']">
+			<when expression='#[vars.transportCompany == "TravelOnTip"]'>
 				<flow-ref doc:name="Flow Reference" doc:id="e81da7f0-15f8-46ad-aeaf-6a7ee4eaf566" name="getRoutes-callTravelOnTip-subflow" />
 			</when>
 			<otherwise>
 				<scatter-gather doc:name="Scatter-Gather" doc:id="8deea1ab-dafc-45b9-8ef3-94140247f376" >
 					<route >
+						<set-variable value="FastGo" doc:name="Set Variable" doc:id="55d0114b-101b-4a64-8089-adc23bb148c7" variableName="transportCompany"/>
 						<flow-ref doc:name="Flow Reference" doc:id="e7f7a530-9316-49aa-991a-10a6b630cf93" name="getRoutes-callFastGo-subflow"/>
 					</route>
 					<route >
+						<set-variable value="TravelOnTip" doc:name="Set Variable" doc:id="c8303dfa-bd33-4084-8f35-38e5dd2e5ae7" variableName="transportCompany"/>
 						<flow-ref doc:name="Flow Reference" doc:id="f247e327-f2da-495a-a364-8827bbd70143" name="getRoutes-callTravelOnTip-subflow"/>
 					</route>
 				</scatter-gather>
-				<logger level="INFO" doc:name="Logger" doc:id="239fe89f-6316-4527-946a-dcf88c340383" message="#[payload]"/>
+				<logger level="INFO" doc:name="Logger" doc:id="239fe89f-6316-4527-946a-dcf88c340383" message="#[(payload.'0'.payload default[])++(payload.'1'.payload default[])]"/>
+				<set-payload value="#[%dw 2.0&#10;output application/json&#10;---&#10;(payload.'0'.payload default[]) ++ (payload.'1'.payload default[])]" doc:name="Set Payload" doc:id="8347da7f-f55b-4125-9191-660f4f363094" />
 			</otherwise>
 		</choice>
 	</sub-flow>
