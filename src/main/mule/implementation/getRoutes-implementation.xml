@@ -19,19 +19,20 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 					<ee:message>
 						<ee:set-payload><![CDATA[%dw 2.0
 output application/json
+var LocationMapping = (readUrl("classPath://json/LocationcodeMapping.json","application/json"))
 ---
 payload map(value,index)->(
 	{
     "companyCode": vars.transportCompany,
     "originLocation": {
-      "locationCode": value.departureLocationCode,
-      "locationDesc": "Beauna Vista Singapore"
-    },
+      "locationCode": value.originLocation.locationCode,
+      "locationDesc": (LocationMapping filter($locationCode == value.originLocation.locationCode))[0].locationDesc
+      },
     "destinationLocation": {
-      "locationCode": value.arrivalLocationCode,
-      "locationDesc": "Klang Malaysia"
-    }
-  }
+      "locationCode": value.destinationLocation.locationCode,
+      "locationDesc": (LocationMapping filter($locationCode==value.destinationLocation.locationCode))[1].locationDesc
+        }
+     }
 )
 ]]></ee:set-payload>
 					</ee:message>
