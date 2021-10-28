@@ -125,10 +125,11 @@ output application/json
             <ee:message />
 			<ee:variables>
                 <ee:set-variable variableName="transportType"><![CDATA[attributes.uriParams.'transportType']]></ee:set-variable>
-				<ee:set-variable variableName="Transactionid"><![CDATA[attributes.headers.Transactionid]]></ee:set-variable>
+				<ee:set-variable variableName="Transactionid"><![CDATA[attributes.headers.'Transactionid']]></ee:set-variable>
 				<ee:set-variable variableName="destinationLocation"><![CDATA[attributes.queryParams.'destinationLocation']]></ee:set-variable>
-				<ee:set-variable variableName="departureLocation "><![CDATA[attributes.queryParams.departureLocation]]></ee:set-variable>
-				<ee:set-variable variableName="transportCompany" ><![CDATA[attributes.queryParams.'CompanyName']]></ee:set-variable>
+				<ee:set-variable variableName="departureLocation "><![CDATA[attributes.queryParams.'departureLocation']]></ee:set-variable>
+				<ee:set-variable variableName="transportCompany" ><![CDATA[attributes.queryParams.'CompanyName'
+]]></ee:set-variable>
             </ee:variables>
         </ee:transform>
 	</sub-flow>
