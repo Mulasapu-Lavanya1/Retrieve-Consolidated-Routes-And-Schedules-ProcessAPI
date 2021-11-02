@@ -23,18 +23,18 @@ var LocationMapping = (readUrl("classPath://json/LocationcodeMapping.json","appl
 ---
 payload map(value,index)->(
 	{
-    "companyCode": vars.transportCompany,
-    "originLocation": {
-      "locationCode": value.originLocation.locationCode,
-      "locationDesc": (LocationMapping filter($locationCode == value.originLocation.locationCode))[0].locationDesc
-      },
-    "destinationLocation": {
-      "locationCode": value.destinationLocation.locationCode,
-      "locationDesc": (LocationMapping filter($locationCode==value.destinationLocation.locationCode))[1].locationDesc
-        }
-     }
-)
-]]></ee:set-payload>
+	 "companyCode": vars.transportCompany,
+	  "originLocation": {
+	  	 "locationCode": value.originLocation.locationCode,
+	  	 "locationDesc": (LocationMapping filter($.locationCode == value.originLocation.locationCode))[0].locationDesc
+	          },
+	  "destinationLocation": {
+	  	 "locationCode": value.destinationLocation.locationCode,
+	  	 "locationDesc": (LocationMapping filter($.locationCode == value.destinationLocation.locationCode))[0].locationDesc
+	         }
+	  
+}
+)]]></ee:set-payload>
 					</ee:message>
 				</ee:transform>
 					<logger level="INFO" doc:name="Logger" doc:id="a00a8bee-26a8-4ce0-bf3e-3fa3e40ea4e7" message="cache logger" />
