@@ -22,6 +22,6 @@ http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/cu
 		<http:request-connection host="${http.requester.FastGo.host}" port="${http.requester.FastGo.port}" />
 	</http:request-config>
 	<os:object-store name="Object_store" doc:name="Object store" doc:id="19ae7e90-2c81-4af6-a925-c5336dd00015" maxEntries="1000" entryTtl="15" entryTtlUnit="MINUTES" expirationInterval="10" />
-    <ee:object-store-caching-strategy name="Caching_Strategy" doc:name="Caching Strategy" doc:id="048fd80a-97a1-4af1-8f8b-c2248726d635" objectStore="Object_store" keyGenerationExpression='#[vars.transportCompany ++ vars.transportType ++ "Routes"]'/>
+    <ee:object-store-caching-strategy name="Caching_Strategy" doc:name="Caching Strategy" doc:id="048fd80a-97a1-4af1-8f8b-c2248726d635" objectStore="Object_store" keyGenerationExpression='#[vars.transportCompany ++ vars.transportType ++ vars.resource]'/>
 		
 </mule>
