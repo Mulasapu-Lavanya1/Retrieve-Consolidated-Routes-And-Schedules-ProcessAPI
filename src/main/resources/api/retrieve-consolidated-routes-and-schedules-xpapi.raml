@@ -1,0 +1,75 @@
+#%RAML 1.0
+title: Retrieve-Consolidated-Routes-And-Schedules ProcessAPI BAPI
+description: This RAML file will retrieve consolidated and Schedules for ProcessAPI
+
+uses:
+  common : /libraries/common/common-business-library.raml
+  routes: libraries/routes/routes-bussiness-library.raml
+  schedules: libraries/schedules/Schedules-bussiness-library.raml
+/booking:
+   /{transportType}:
+     /routes:
+       get:
+         is:
+          - common.Transactionid
+          - common.CompanyName
+          - common.departureLocation
+          - common.destinationLocation
+         responses:
+             200:
+              body:
+                application/json:
+                  type: routes.getRouteResponse
+                  example: !include /libraries/routes/examples/getRoutes200Response-example.json 
+                     
+             400:
+               body:
+                application/json:
+                  type: common.commonErrorResponse
+                  example: !include /libraries/common/examples/400Responses-example.json
+                    
+             404:
+               body:
+                application/json:
+                  type: common.commonErrorResponse
+                  example: !include /libraries/common/examples/404Responses-example.json    
+                   
+             500:
+               body:
+                application/json:
+                  type: common.commonErrorResponse
+                  example: !include /libraries/common/examples/500Response-example.json
+
+     /schedules:
+       get:
+        is:
+          - common.Transactionid
+          - common.CompanyName
+          - common.departureLocation
+          - common.destinationLocation
+          - common.requestTimeZone
+          
+        responses:
+          200:
+            body:
+              application/json:
+                type: schedules.getSchedulesResponse 
+                example: !include /libraries/schedules/examples/getShedules200Response-XP-example.json
+          400:
+               body:
+                application/json:
+                  type: common.commonErrorResponse 
+                  example: !include /libraries/common/examples/400Responses-example.json
+                  
+          404:
+              body:
+                  application/json:
+                      type: common.commonErrorResponse
+                      example: !include /libraries/common/examples/404Responses-example.json
+          500:
+               body:
+                application/json:
+                  type: common.commonErrorResponse
+                  example: !include /libraries/common/examples/500Response-example.json            
+                        
+                            
